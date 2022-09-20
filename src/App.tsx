@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import hangman0 from "./images/Hangman-0.png";
 
 function App() {
   // TODO: Make sure to always have a capital letter, even if the input was not
+  const [misses, setMisses] = useState<string[]>(["A","B","C"]); // TODO: init as empty
 
   return (
     <div className="App">
@@ -23,7 +24,12 @@ function App() {
       {/* TODO: extract to component that gets the (incomplete) word and displays "Word: " with spaces... */}
       <p>Word: _ _ _ _</p>
       {/* TODO: Extract to component that gets an array of letter misses */}
-      <p>Misses: A,B,C</p>
+      <p>Misses:{' '}
+        {misses.map((letter, i) => [
+          i > 0 && ", ",
+          <span key={i}>{letter}</span>
+        ])}
+      </p>
       {/* TODO: only allow letters & auto capitalize the letter */}
       <input type="text" id="atext" maxLength={1} placeholder="Enter letter guess" />
       {/* TODO: handle submit click */}
