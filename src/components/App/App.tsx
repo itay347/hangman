@@ -85,7 +85,7 @@ function App() {
       <h1>Hangman</h1>
       <WordSelect words={words} onWordIndexChange={handleWordIndexChange} />
       <button onClick={() => resetGame()}>Reset game</button>
-      {word && (
+      {gameState !== GameState.NotStarted && (
         <>
           <HangmanDrawing missesCount={misses.length} />
           <WordDisplay word={word} revealedLetters={revealedLetters} />
