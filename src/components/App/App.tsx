@@ -91,6 +91,7 @@ function App() {
           <WordDisplay word={word} revealedLetters={revealedLetters} />
           <Misses misses={misses} />
           <LetterInput
+            className="Letter-input"
             letter={letterInput}
             onLetterChange={handleLetterChange}
             onEnterKeyDown={handleSubmitClick}

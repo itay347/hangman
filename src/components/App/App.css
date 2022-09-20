@@ -5,7 +5,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #000000;
+}
+
+p {
+  margin: 10px 0;
+}
+
+button {
+  margin: 20px 0;
+}
+
+.Letter-input {
+  margin-top: 20px; 
 }

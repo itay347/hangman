@@ -5,9 +5,9 @@ type LetterInputProps = {
   onLetterChange: (letter: string) => void;
   onEnterKeyDown: () => void;
   disabled: boolean;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
-function LetterInput({letter, onLetterChange, onEnterKeyDown, disabled}: LetterInputProps) {
+function LetterInput({letter, onLetterChange, onEnterKeyDown, disabled, className}: LetterInputProps) {
 
   const handlerLetterInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     let letter: string = event.target.value.toUpperCase().replace(/[^A-Z]/gi, "");
@@ -16,6 +16,7 @@ function LetterInput({letter, onLetterChange, onEnterKeyDown, disabled}: LetterI
 
   return (
     <input
+      className={className}
       type="text"
       id="letter-input"
       name="letter"
