@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Misses from "../Misses";
 import "./App.css";
-import hangman0 from "./images/Hangman-0.png";
+import HangmanDrawing from "../HangmanDrawing";
 
 function App() {
   // TODO: Make sure to always have a capital letter, even if the input was not
@@ -20,8 +20,7 @@ function App() {
       </select>
       {/* TODO: handle reset click */}
       <button>Reset game</button>
-      {/* TODO: extract the image to a component that gets the number of misses and displays the correct image */}
-      <img src={hangman0} className="Hangman-Image" alt="hangman drawing" />
+      <HangmanDrawing missesCount={misses.length} />
       {/* TODO: extract to component that gets the (incomplete) word and displays "Word: " with spaces... */}
       <p>Word: _ _ _ _</p>
       <Misses misses={misses} />
