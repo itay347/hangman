@@ -8,8 +8,6 @@ import LetterInput from "../LetterInput";
 import WordDisplay from "../WordDisplay";
 import { MAX_MISSES } from "../HangmanDrawing/images/index";
 
-// TODO: remove all logs after I'm done
-
 enum GameState {
   NotStarted,
   Playing,
@@ -25,8 +23,6 @@ const App = () => {
   const [letterInput, setLetterInput] = useState<string>("");
   const [gameState, setGameState] = useState<GameState>(GameState.NotStarted);
   const isGameOver = gameState === GameState.Lose || gameState === GameState.Win;
-
-  useEffect(() => console.log({wordIndex, word}), [wordIndex, word]);
 
   const resetGame = () => {
     setGameState(GameState.Playing);
@@ -52,7 +48,6 @@ const App = () => {
     if (revealedLetters.includes(letterInput) || misses.includes(letterInput)) {
       window.alert("You already guessed the letter " + letterInput);
     } else {
-      console.log("submitted: " + letterInput);
       if (word?.includes(letterInput)) {
         setRevealedLetters([...revealedLetters, letterInput]);
       } else {
