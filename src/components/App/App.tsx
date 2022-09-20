@@ -17,7 +17,7 @@ enum GameState {
   Lose
 }
 
-function App() {
+const App = () => {
   const [wordIndex, setWordIndex] = useState<number>();
   const word = wordIndex !== undefined ? words[wordIndex] : "";
   const [revealedLetters, setRevealedLetters] = useState<string[]>([]);

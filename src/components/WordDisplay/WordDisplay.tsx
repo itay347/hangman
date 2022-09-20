@@ -5,7 +5,7 @@ type WordDisplayProps = {
   revealedLetters: string[];
 }
 
-function WordDisplay({word, revealedLetters}: WordDisplayProps) {
+const WordDisplay = ({word, revealedLetters}: WordDisplayProps) => {
   const createDisplayWord = (word: string, revealedLetters: string[]) => {
     const displayWord =  word.split("").map(letter => {
       return revealedLetters.includes(letter) ? letter : "_"

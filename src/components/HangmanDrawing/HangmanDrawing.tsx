@@ -4,7 +4,7 @@ type HangmanDrawingProps = {
   missesCount: number;
 };
 
-function HangmanDrawing({missesCount}: HangmanDrawingProps) {
+const HangmanDrawing = ({missesCount}: HangmanDrawingProps) => {
   return (
     <img
       src={images[missesCount]}

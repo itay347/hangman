@@ -3,7 +3,7 @@ type GameSelectProps = {
   onWordIndexChange: (wordIndex: number) => void;
 }
 
-function WordSelect({words, onWordIndexChange}: GameSelectProps) {
+const WordSelect = ({words, onWordIndexChange}: GameSelectProps) => {
   return (
     <select
       name="word"

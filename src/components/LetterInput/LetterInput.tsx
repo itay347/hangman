@@ -7,7 +7,7 @@ type LetterInputProps = {
   disabled: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-function LetterInput({letter, onLetterChange, onEnterKeyDown, disabled, className}: LetterInputProps) {
+const LetterInput = ({letter, onLetterChange, onEnterKeyDown, disabled, className}: LetterInputProps) => {
 
   const handlerLetterInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     let letter: string = event.target.value.toUpperCase().replace(/[^A-Z]/gi, "");

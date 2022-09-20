@@ -2,7 +2,7 @@ type MissesProps = {
   misses: string[];
 };
 
-function Misses({ misses }: MissesProps) {
+const Misses = ({ misses }: MissesProps) => {
   return (
     <p>
       Misses:{" "}
