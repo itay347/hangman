@@ -3,6 +3,7 @@ import Misses from "../Misses";
 import "./App.css";
 import HangmanDrawing from "../HangmanDrawing";
 import words from "./words";
+import WordSelect from "../WordSelect";
 
 // TODO: remove all logs after I'm done
 
@@ -31,8 +32,8 @@ function App() {
     setLetterInput("");
   }
 
-  const handleWordSelectChange: ChangeEventHandler<HTMLSelectElement> = (event) => {
-    setWordIndex(Number(event.target.value));
+  const handleWordIndexChange = (wordIndex: number) => {
+    setWordIndex(wordIndex);
     resetGame();
   }
 
@@ -72,21 +73,7 @@ function App() {
   return (
     <div className="App">
       <h1>Hangman</h1>
-      <select
-        name="word"
-        id="word-select"
-        defaultValue="none"
-        onChange={handleWordSelectChange}
-      >
-        <option value="none" disabled hidden>
-          Click to choose a game...
-        </option>
-        {words.map((_, i) => (
-          <option key={i} value={i}>
-            {i + 1}
-          </option>
-        ))}
-      </select>
+      <WordSelect words={words} onWordIndexChange={handleWordIndexChange} />
       <button onClick={() => resetGame()}>Reset game</button>
       {
         word &&
