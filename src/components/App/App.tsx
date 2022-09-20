@@ -30,9 +30,6 @@ function App() {
   }
 
   const handleLetterChange = (letter: string) => {
-    if (letter !== "") {
-      console.log(letter);
-    }
     setLetterInput(letter);
   }
 
@@ -43,7 +40,6 @@ function App() {
 
     if (revealedLetters.includes(letterInput) || misses.includes(letterInput)) {
       window.alert("You already guessed the letter " + letterInput);
-      setLetterInput("");
     } else {
       console.log("submitted: " + letterInput);
       if (word?.includes(letterInput)) {
@@ -51,8 +47,9 @@ function App() {
       } else {
         setMisses([...misses, letterInput]);
       }
-      setLetterInput("");
     }
+
+    setLetterInput("");
   }
 
   return (
