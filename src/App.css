@@ -9,3 +9,8 @@
   font-size: calc(10px + 2vmin);
   color: #000000;
 }
+
+.Hangman-Image {
+  height: 30vmin;
+  pointer-events: none;
+}
