@@ -1,10 +1,11 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Misses from "../Misses";
 import "./App.css";
 import HangmanDrawing from "../HangmanDrawing";
 import words from "./words";
 import WordSelect from "../WordSelect";
 import LetterInput from "../LetterInput";
+import WordDisplay from "../WordDisplay";
 
 // TODO: remove all logs after I'm done
 
@@ -14,16 +15,6 @@ function App() {
   const [revealedLetters, setRevealedLetters] = useState<string[]>([]);
   const [misses, setMisses] = useState<string[]>([]);
   const [letterInput, setLetterInput] = useState<string>("");
-
-  const createDisplayWord = (word: string, revealedLetters: string[]) => {
-    const displayWord =  word.split("").map(letter => {
-      return revealedLetters.includes(letter) ? letter : "_"
-    }).join(" ");
-
-    return displayWord;
-  }
-
-  const displayWord = useMemo(() => createDisplayWord(word, revealedLetters), [word, revealedLetters]);
 
   useEffect(() => console.log({wordIndex, word}), [wordIndex, word]);
 
@@ -72,7 +63,7 @@ function App() {
       {word && (
         <>
           <HangmanDrawing missesCount={misses.length} />
-          <p>{"Word: " + displayWord}</p>
+          <WordDisplay word={word} revealedLetters={revealedLetters} />
           <Misses misses={misses} />
           <LetterInput
             letter={letterInput}
