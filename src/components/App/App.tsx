@@ -51,7 +51,6 @@ function App() {
     }
 
     if (revealedLetters.includes(letterInput) || misses.includes(letterInput)) {
-      // NOTE: This is not supposed to happen, but just to make sure:
       window.alert("You already guessed the letter " + letterInput);
       setLetterInput("");
     } else {

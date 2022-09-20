@@ -1,5 +1,5 @@
 type GameSelectProps = {
-  words: string[],
+  words: string[];
   onWordIndexChange: (wordIndex: number) => void;
 }
 
@@ -9,7 +9,9 @@ function WordSelect({words, onWordIndexChange}: GameSelectProps) {
       name="word"
       id="word-select"
       defaultValue="none"
-      onChange={(event) => {onWordIndexChange(Number(event.target.value))}}
+      onChange={(event) => {
+        onWordIndexChange(Number(event.target.value));
+      }}
     >
       <option value="none" disabled hidden>
         Click to choose a game...
