@@ -1,9 +1,10 @@
-import { useState, ChangeEventHandler, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Misses from "../Misses";
 import "./App.css";
 import HangmanDrawing from "../HangmanDrawing";
 import words from "./words";
 import WordSelect from "../WordSelect";
+import LetterInput from "../LetterInput";
 
 // TODO: remove all logs after I'm done
 
@@ -37,17 +38,10 @@ function App() {
     resetGame();
   }
 
-  const handlerLetterInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    let letter: string = event.target.value.toUpperCase().replace(/[^A-Z]/gi, "");
-
+  const handleLetterChange = (letter: string) => {
     if (letter !== "") {
       console.log(letter);
-
-      if (revealedLetters.includes(letter) || misses.includes(letter)) {
-        letter = "";
-      }
     }
-
     setLetterInput(letter);
   }
 
@@ -59,6 +53,7 @@ function App() {
     if (revealedLetters.includes(letterInput) || misses.includes(letterInput)) {
       // NOTE: This is not supposed to happen, but just to make sure:
       window.alert("You already guessed the letter " + letterInput);
+      setLetterInput("");
     } else {
       console.log("submitted: " + letterInput);
       if (word?.includes(letterInput)) {
@@ -75,27 +70,20 @@ function App() {
       <h1>Hangman</h1>
       <WordSelect words={words} onWordIndexChange={handleWordIndexChange} />
       <button onClick={() => resetGame()}>Reset game</button>
-      {
-        word &&
+      {word && (
         <>
           <HangmanDrawing missesCount={misses.length} />
           <p>{"Word: " + displayWord}</p>
           <Misses misses={misses} />
-          <input
-            type="text"
-            id="letter-input"
-            name="letter"
-            maxLength={1}
-            placeholder="Enter letter guess"
-            value={letterInput}
-            onChange={handlerLetterInputChange}
-            onKeyDown={(e) => {if (e.key === "Enter") handleSubmitClick()}}
+          <LetterInput
+            letter={letterInput}
+            onLetterChange={handleLetterChange}
+            onEnterKeyDown={handleSubmitClick}
           />
           <button onClick={handleSubmitClick}>Submit</button>
           {/* TODO: add win/lose display */}
         </>
-      }
-      
+      )}
     </div>
   );
 }
