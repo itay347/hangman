@@ -15,6 +15,8 @@ enum GameState {
   Lose
 }
 
+const Title: string = "Hangman";
+
 const App = () => {
   const [wordIndex, setWordIndex] = useState<number>();
   const word = wordIndex !== undefined ? words[wordIndex] : "";
@@ -73,11 +75,24 @@ const App = () => {
     if (misses.length >= MAX_MISSES) {
       setGameState(GameState.Lose);
     }
-  }, [misses])
+  }, [misses]);
+
+  useEffect(() => {
+    switch (gameState) {
+      case GameState.Win:
+        document.title = "You Won! | " + Title;
+        break;
+      case GameState.Lose:
+        document.title = "You Lost! | " + Title;
+        break;
+      default:
+        document.title = Title;
+    }
+  }, [gameState]);
 
   return (
     <div className="App">
-      <h1>Hangman</h1>
+      <h1>{Title}</h1>
       <WordSelect words={words} onWordIndexChange={handleWordIndexChange} />
       <button onClick={() => resetGame()}>Reset game</button>
       {gameState !== GameState.NotStarted && (
