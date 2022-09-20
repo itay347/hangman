@@ -16,4 +16,6 @@ const hangmanImages = [
   Hangman6,
 ];
 
+export const MAX_MISSES = hangmanImages.length - 1;
+
 export default hangmanImages;

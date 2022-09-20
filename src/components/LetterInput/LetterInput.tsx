@@ -4,9 +4,10 @@ type LetterInputProps = {
   letter: string;
   onLetterChange: (letter: string) => void;
   onEnterKeyDown: () => void;
+  disabled: boolean;
 };
 
-function LetterInput({letter, onLetterChange, onEnterKeyDown}: LetterInputProps) {
+function LetterInput({letter, onLetterChange, onEnterKeyDown, disabled}: LetterInputProps) {
 
   const handlerLetterInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     let letter: string = event.target.value.toUpperCase().replace(/[^A-Z]/gi, "");
@@ -25,6 +26,7 @@ function LetterInput({letter, onLetterChange, onEnterKeyDown}: LetterInputProps)
       onKeyDown={(e) => {
         if (e.key === "Enter") onEnterKeyDown();
       }}
+      disabled={disabled}
     />
   );
 }

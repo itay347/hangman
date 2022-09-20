@@ -6,8 +6,16 @@ import words from "./words";
 import WordSelect from "../WordSelect";
 import LetterInput from "../LetterInput";
 import WordDisplay from "../WordDisplay";
+import { MAX_MISSES } from "../HangmanDrawing/images/index";
 
 // TODO: remove all logs after I'm done
+
+enum GameState {
+  NotStarted,
+  Playing,
+  Win,
+  Lose
+}
 
 function App() {
   const [wordIndex, setWordIndex] = useState<number>();
@@ -15,10 +23,13 @@ function App() {
   const [revealedLetters, setRevealedLetters] = useState<string[]>([]);
   const [misses, setMisses] = useState<string[]>([]);
   const [letterInput, setLetterInput] = useState<string>("");
+  const [gameState, setGameState] = useState<GameState>(GameState.NotStarted);
+  const isGameOver = gameState == GameState.Lose || gameState == GameState.Win;
 
   useEffect(() => console.log({wordIndex, word}), [wordIndex, word]);
 
   const resetGame = () => {
+    setGameState(GameState.Playing);
     setRevealedLetters([]);
     setMisses([]);
     setLetterInput("");
@@ -52,6 +63,23 @@ function App() {
     setLetterInput("");
   }
 
+  useEffect(() => {
+    if (word === "") {
+      return;
+    }
+
+    const unrevealedLetters = word.split("").filter(letter => !revealedLetters.includes(letter));
+    if (unrevealedLetters.length === 0) {
+      setGameState(GameState.Win);
+    }
+  }, [word, revealedLetters]);
+
+  useEffect(() => {
+    if (misses.length >= MAX_MISSES) {
+      setGameState(GameState.Lose);
+    }
+  }, [misses])
+
   return (
     <div className="App">
       <h1>Hangman</h1>
@@ -66,9 +94,13 @@ function App() {
             letter={letterInput}
             onLetterChange={handleLetterChange}
             onEnterKeyDown={handleSubmitClick}
+            disabled={isGameOver}
           />
-          <button onClick={handleSubmitClick}>Submit</button>
-          {/* TODO: add win/lose display */}
+          <button onClick={handleSubmitClick} disabled={isGameOver}>Submit</button>
+          <h2>
+            { gameState === GameState.Win && "You won the game" }
+            { gameState === GameState.Lose && "You lost the game" }
+          </h2>
         </>
       )}
     </div>
