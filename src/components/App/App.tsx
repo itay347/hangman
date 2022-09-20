@@ -24,7 +24,7 @@ function App() {
   const [misses, setMisses] = useState<string[]>([]);
   const [letterInput, setLetterInput] = useState<string>("");
   const [gameState, setGameState] = useState<GameState>(GameState.NotStarted);
-  const isGameOver = gameState == GameState.Lose || gameState == GameState.Win;
+  const isGameOver = gameState === GameState.Lose || gameState === GameState.Win;
 
   useEffect(() => console.log({wordIndex, word}), [wordIndex, word]);
 
